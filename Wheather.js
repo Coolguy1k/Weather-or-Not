@@ -77,3 +77,78 @@ async function getWeather(lat, lon) {
         console.error("Error fetching weather data:", error);
     }
 }
+
+function displayWeather(data) {
+  try {
+    const city = data.city.name;
+    cityHistory.textContent = "";
+
+    for (let i = 0; i < 6; i++) {
+      temps[i] = data.list[indexs[i]].main.temp;
+      humids[i] = data.list[indexs[i]].main.humidity;
+      winds[i] = data.list[indexs[i]].wind.speed;
+      dates[i] = new Date(data.list[indexs[i]].dt * 1000);
+    }
+
+    cities.push(...data.list.slice(0, 5));
+
+    for (let j = 0; j < 6; j++) {
+      tempEls[j].textContent = `Temperature: ${temps[j]}°C`;
+      humidEls[j].textContent = `Humidity: ${humids[j]}%`;
+      windEls[j].textContent = `Wind Speed: ${winds[j]}KM/H`;
+      cityDayEls[j].textContent = `City Day: ${city} ${dates[
+        j
+      ].toLocaleDateString()}`;
+      weatherIconEls[j].setAttribute(
+        "src",
+        `https://openweathermap.org/img/w/${data.list[j].weather[0].icon}.png`
+      );
+    }
+  } catch (error) {
+    console.error("Error displaying weather:", error);
+  }
+}
+
+elements.searchButton.addEventListener("click", function () {
+  const searchInput = elements.searchInput.value;
+  getLocation(searchInput);
+
+  if (cityHistory.length < 3) {
+    cityHistory.unshift(searchInput);
+  } else {
+    cityHistory.pop();
+    cityHistory.unshift(searchInput);
+  }
+  updateCityHistory(cityHistory);
+});
+
+const storedCityHistory = JSON.parse(localStorage.getItem("city_history"));
+if (Array.isArray(storedCityHistory)) {
+  cityHistory.push(...storedCityHistory);
+}
+
+function printCityHistory() {
+  elements.cityHistory.innerHTML = "";
+  for (let i = 0; i < cityHistory.length; i++) {
+    const listItem = document.createElement("li");
+    listItem.setAttribute("id", `city-history-${i}`);
+    elements.cityHistory.appendChild(listItem);
+
+    const button = document.createElement("button");
+    button.setAttribute("value", cityHistory[i]);
+    button.textContent = cityHistory[i];
+    listItem.appendChild(button);
+
+    button.addEventListener("click", function (event) {
+      const city = event.target.value;
+      getLocation(city);
+    });
+  }
+}
+
+function updateCityHistory(searchInput) {
+  localStorage.setItem("city_history", JSON.stringify(searchInput));
+  printCityHistory();
+}
+
+printCityHistory();
