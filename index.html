@@ -5,26 +5,34 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-        <title>Weather or Not</title>
+        <title>Weather Ladder</title>
     </head>
 
+<style> Forcast {
+
+        margin: 0;
+        background-color: #000000;
+
+    }
+</style>
+
     <body>
-        <header id="header" class="title has-text-centered is-size-1">
-            <h1>Weather</h1>
+        <header id="header" class="title has-text-centered has-background-link has-text-success is-size-1 mx-1 my-1">
+            <h1>Weather Ladder</h1>
         </header>
 
-        <div id="searchDiv" class="has-text-centered">
+        <div id="searchDiv" class="has-text-centered has-background-success">
             <input type="text" id="search-input">
             <button id="search-button">Search</button>
             <div id="search-history">
                 <h2>Search History:</h2>
                 <ul id="city-history"></ul>
-                <a href="assets/23613146140_6edfea579f_k.jpg" target=""><img id="weather-icon" src="assets/23613146140_6edfea579f_k.jpg" alt="weather pic"></a>
+                <a href="assets/altocumulus.jpg" target=""><img id="weather-icon" src="assets/altocumulus.jpg" alt="weather pic"></a>
             </div>
         </div>
 
-        <main id="weather-box" class="container has-text-centered">
-            <section class="row justify-center">
+        <Forcast id="weather-box" class="container has-text-centered">
+            <section class="row justify-center has-text-white has-background-black">
                 <article class="card-column">
                     <figure class="card-block">
                         <h2 class="header-block">Current Weather Forecast</h2>
@@ -39,8 +47,8 @@
                 </article>
             </section>
 
-            <section class="row">
-                <article class="card-column">
+            <section class="row has">
+                <article class="column has-background-black-ter has-text-white">
                     <figure class="card-block">
                         <h2 class="header-block">One Day Forecast</h2>
                         <aside class="weather-block">
@@ -54,7 +62,7 @@
                     </figure>
                 </article>
 
-                <article class="card-column">
+                <article class="column has-text-white has-background-grey-darker">
                     <figure class="card-block">
                         <h2 class="header-block">Two Day Forecast</h2>
                         <aside class="weather-block">
@@ -68,7 +76,7 @@
                     </figure>
                 </article>
 
-                <article class="card-column">
+                <article class="column has-text-white has-background-grey-dark">
                     <figure class="card-block">
                         <h2 class="header-block">Three Day Forecast</h2>
                         <aside class="weather-block">
@@ -81,7 +89,7 @@
                     </figure>
                 </article>
 
-                <article class="card-column">
+                <article class="column has-text-white has-background-grey-dark">
                     <figure class="card-block">
                         <h2 class="header-block">Four Day Forecast</h2>
                         <aside class="weather-block">
@@ -94,7 +102,7 @@
                     </figure>
                 </article>
 
-                <article class="card-column">
+                <article class="column has-text-white has-background-grey-light">
                     <figure class="card-block">
                         <h2 class="header-block">Five Day Forecast</h2>
                         <aside class="weather-block">
@@ -106,7 +114,7 @@
                         </aside>
                     </figure>
                 </article>
-        </main>
+            </Forcast>
             </section>
             <script src="./Wheather.js"></script>
         </body>
